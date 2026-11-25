@@ -1,0 +1,200 @@
+<h2>Muse AI – AI Image Generator for iOS</h2>
+
+<p><strong>Muse AI</strong> is a complete SwiftUI iOS app for turning text into images. Buyers get a full Xcode project with onboarding, a create flow, gallery, editor, subscriptions, and documentation. This is <strong>not</strong> an official OpenAI product and is not affiliated with, endorsed by, or partnered with OpenAI.</p>
+
+<p><strong>Required to run:</strong> You must provide your <strong>own paid OpenAI API account and credits</strong>. The app does not include API access, free credits, or an OpenAI subscription. Create an account at platform.openai.com, add a payment method, buy credits, then paste your API key into <code>AppConfig.swift</code>. Without a paid OpenAI account and available credits, image generation will not work.</p>
+
+<p><strong>38 Swift source files. 6,500+ lines of code. Zero third-party dependencies. 100% native Apple frameworks.</strong></p>
+
+<p><a href="https://youtu.be/Uh7lj-3hkEU"><strong>Watch the demo video on YouTube</strong></a></p>
+
+<hr>
+
+<h3>What the App Does</h3>
+
+<p>Users type a description such as “a cat wearing a space suit on the moon.” Muse AI generates an image in about 10–30 seconds. They can pick from 12 styles, adjust quality and size, save to a gallery, edit with filters, upscale, and share. Free users get 5 images per day. Paid subscribers get unlimited access.</p>
+
+<hr>
+
+<h3>How It Makes Money</h3>
+
+<p>The app uses <strong>StoreKit 2</strong> with three subscription tiers:</p>
+<ul>
+<li><strong>Monthly</strong> — $3.99/month</li>
+<li><strong>Yearly</strong> — $9.99/year (best value)</li>
+<li><strong>Lifetime</strong> — $19.99 one-time purchase</li>
+</ul>
+
+<p>The paywall is A/B tested — half of users see yearly-first, half see lifetime-first. A smart paywall appears after the user’s 3rd generation. Free users also earn bonus credits through daily streaks.</p>
+
+<hr>
+
+<h3>Onboarding and Paywall Walkthrough</h3>
+
+<p><strong>Onboarding (4 screens, skippable)</strong></p>
+<ol>
+<li><strong>Meet Muse AI</strong> — Explains that a short description becomes a finished image.</li>
+<li><strong>Twelve Signature Styles</strong> — Photorealistic, anime, oil painting, pixel art, cinematic, and more.</li>
+<li><strong>Your Personal Studio</strong> — Gallery, favorites, collections, and saved prompts.</li>
+<li><strong>Five Free Images Daily</strong> — Free tier, then a Start Creating button that opens the main app.</li>
+</ol>
+
+<p><strong>Paywall</strong></p>
+<ol>
+<li>Opens after onboarding skip is complete, after the 3rd generation, or from Settings → Upgrade to Pro.</li>
+<li>Shows a headline, social-proof badges, a Free vs Pro comparison table, and three StoreKit products.</li>
+<li>Yearly and Lifetime variants are A/B tested. Restore Purchases, Privacy Policy, and Terms of Use are on the same screen.</li>
+<li>Purchases run through Apple. Use the included <code>Products.storekit</code> file for local testing.</li>
+</ol>
+
+<hr>
+
+<h3>Main Screens</h3>
+
+<ul>
+<li><strong>Splash</strong> — Animated Muse AI logo and tagline.</li>
+<li><strong>Explore</strong> — Inspiration images, quick-start chips, and one-tap prompts.</li>
+<li><strong>Create</strong> — Prompt, styles, quality, size, image-to-image, and Generate.</li>
+<li><strong>Gallery</strong> — Auto-saved images, favorites, collections, and search.</li>
+<li><strong>Editor / Export</strong> — Filters, rotate, text overlay, upscale, JPEG/PNG/HEIC export.</li>
+<li><strong>Settings</strong> — Streaks, appearance, notifications, restore purchases, legal links.</li>
+</ul>
+
+<hr>
+
+<h3>Image Features</h3>
+
+<ul>
+<li><strong>Image generation</strong> — Uses the OpenAI image API (you supply the paid account and key)</li>
+<li><strong>12 style presets</strong> — Photorealistic, Digital Art, Anime, Oil Painting, Watercolor, 3D Render, Pixel Art, Cinematic, Fantasy, Minimalist, Comic Book, Sketch</li>
+<li><strong>Prompt enhancement</strong> — Optional rewrite of a short prompt into a more detailed one</li>
+<li><strong>Image-to-image</strong> — Upload a photo and describe the change</li>
+<li><strong>Negative prompts, batch (up to 4), 3 aspect ratios, 3 quality levels, automatic retry</strong></li>
+</ul>
+
+<hr>
+
+<h3>Gallery, Editing, and Retention</h3>
+
+<ul>
+<li>Auto-save gallery with favorites, collections, and search</li>
+<li>Canvas editor, 9 filters, rotate/flip, text overlay, 2x–4x upscale, watermarked export</li>
+<li>Daily streaks, smart App Store review prompts, push reminders, prompt library, Discover feed</li>
+<li>Home screen widget, Siri Shortcuts, iPhone + iPad + Mac Catalyst, light and dark mode</li>
+</ul>
+
+<hr>
+
+<h3>How to Test on a Physical Device</h3>
+
+<ol>
+<li>Connect an iPhone or iPad with a Lightning/USB-C cable and unlock the device.</li>
+<li>In Xcode, open <code>ArtGenerator.xcodeproj</code>, select the ArtGenerator scheme, then pick your device in the run destination menu.</li>
+<li>Signing: Target → Signing &amp; Capabilities → enable Automatically manage signing → choose your Team. Change the bundle ID if the default is taken (for example <code>com.yourname.museai</code>).</li>
+<li>On the device: Settings → General → VPN &amp; Device Management → trust your developer certificate.</li>
+<li>Add your paid OpenAI API key in <code>AppConfig.swift</code> before running. Generation needs a network connection and API credits.</li>
+<li>For subscriptions on device, use a Sandbox Apple ID (App Store Connect → Users and Access → Sandbox) or keep <code>Products.storekit</code> selected in Edit Scheme → Run → Options while debugging from Xcode.</li>
+<li>Press Cmd+R. The splash, onboarding, create, gallery, and paywall flows all run on device. Haptics and the camera/photo picker work only on hardware, not the simulator.</li>
+</ol>
+
+<hr>
+
+<h3>Beginner Guide: Change Text and Colors in Xcode</h3>
+
+<p>You do not need to be an expert. These are the most common edits:</p>
+
+<p><strong>Change on-screen text</strong></p>
+<ol>
+<li>Open the project in Xcode.</li>
+<li>Press Cmd+Shift+F to search the whole project.</li>
+<li>Search for the words you see on screen (for example “Meet Muse AI” or “Upgrade to Pro”).</li>
+<li>Click a result, edit the quoted text, then press Cmd+R to run.</li>
+</ol>
+
+<p><strong>Change the app name</strong></p>
+<ol>
+<li>Select the ArtGenerator target → General → Display Name → type your name.</li>
+<li>Also change <code>AppConfig.appName</code> and <code>AppConfig.appTagline</code> in <code>Configurations/AppConfig.swift</code>. Splash, watermark, and Settings read from those values.</li>
+</ol>
+
+<p><strong>Change colors</strong></p>
+<ol>
+<li>Open <code>Configurations/DesignSystem.swift</code>.</li>
+<li>Edit <code>DS.Colors.accent</code> (the rose brand color). Use a 6-digit hex such as <code>"E11D74"</code>.</li>
+<li>Edit <code>DS.Gradients.accent</code> if you want the buttons and splash ring to match.</li>
+<li>Run the app. Buttons, selected chips, and highlights update together.</li>
+</ol>
+
+<p>A longer step-by-step with architecture notes is in <code>Documentation/index.html</code>.</p>
+
+<hr>
+
+<h3>Architecture and Data Flow</h3>
+
+<p>The app uses SwiftUI with a single shared <code>DataManager</code> (ObservableObject) plus small service classes.</p>
+
+<ol>
+<li>The user types a prompt on <strong>CreatorTabView</strong>.</li>
+<li><strong>DataManager</strong> checks the daily free limit, then calls <strong>OpenAIService</strong> (a Swift actor).</li>
+<li><strong>OpenAIService</strong> sends HTTPS requests to the OpenAI API using <em>your</em> key from <code>AppConfig.swift</code>. Image bytes come back as base64 and become a <code>UIImage</code>.</li>
+<li><strong>GalleryManager</strong> writes the image and metadata to disk. The Create screen and Gallery both observe this state and refresh.</li>
+<li>If the user is not subscribed, <strong>StoreKitManager</strong> loads products and <strong>PaywallView</strong> handles purchase / restore. Entitlement is stored with StoreKit 2.</li>
+</ol>
+
+<p>There are no CocoaPods or Swift Package Manager dependencies. iOS 16.0+, Swift 5.9, Xcode 15+.</p>
+
+<hr>
+
+<h3>Setup (about 5 minutes)</h3>
+
+<ol>
+<li>Open <code>ArtGenerator.xcodeproj</code> in Xcode 15 or later.</li>
+<li>Create a <strong>paid</strong> OpenAI API account, add credits, and paste the key into <code>AppConfig.swift</code>.</li>
+<li>Replace the privacy policy and terms URLs with your own.</li>
+<li>Enable StoreKit testing: Edit Scheme → Run → Options → StoreKit Configuration → <code>Products.storekit</code>.</li>
+<li>Build and run on the simulator or a physical device.</li>
+</ol>
+
+<hr>
+
+<h3>What Is Included</h3>
+
+<ul>
+<li>Full Xcode project (38 Swift files, 6,500+ lines)</li>
+<li>Widget extension</li>
+<li>StoreKit test configuration with 3 products</li>
+<li>Design system with 50+ tokens</li>
+<li>Sample inspiration images and prompt templates</li>
+<li>HTML documentation: setup, beginner Xcode edits, architecture, device testing, API notes</li>
+</ul>
+
+<hr>
+
+<h3>Requirements</h3>
+
+<ul>
+<li>Xcode 15 or later</li>
+<li>macOS Sonoma or later</li>
+<li><strong>Your own paid OpenAI API account and credits</strong> (platform.openai.com — pay-as-you-go; typical image cost is about $0.02–$0.08). This item does not include API credits.</li>
+<li>Apple Developer Program membership ($99/year) for App Store submission and device installation outside the simulator</li>
+</ul>
+
+<hr>
+
+<h3>Demo Video</h3>
+
+<p><a href="https://youtu.be/Uh7lj-3hkEU"><strong>Watch the full demo on YouTube</strong></a></p>
+
+<hr>
+
+<h3>Support</h3>
+
+<p>6 months of included support. We respond within 24 hours. Extended support is available for purchase.</p>
+
+<hr>
+
+<h3>Changelog</h3>
+
+<p><strong>Version 2.1</strong> (18 August 2026) — Muse AI branding and atelier rose design system. Listing and documentation updated: paid OpenAI account requirement stated clearly, beginner Xcode guide, architecture/data-flow notes, onboarding/paywall walkthrough, and physical-device testing steps.</p>
+
+<p><strong>Version 2.0</strong> (12 May 2026) — Complete SwiftUI rewrite. Image API integration, StoreKit 2, design system, iPhone + iPad + Mac Catalyst support.</p>

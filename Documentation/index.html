@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muse AI — Documentation</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0C080A; color: #F6F0F2; line-height: 1.7; }
+.container { max-width: 840px; margin: 0 auto; padding: 40px 24px 80px; }
+h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, #F472B6, #E11D74); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 24px; font-weight: 700; margin: 48px 0 16px; color: #F6F0F2; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+h3 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; color: #F472B6; }
+p { margin-bottom: 16px; color: #B8A8AE; }
+ul, ol { margin-bottom: 16px; padding-left: 24px; }
+li { margin-bottom: 8px; color: #B8A8AE; }
+code { background: rgba(225,29,116,0.12); color: #F472B6; padding: 2px 8px; border-radius: 4px; font-family: 'SF Mono', ui-monospace, monospace; font-size: 14px; }
+pre { background: #1A1014; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin: 16px 0; overflow-x: auto; }
+pre code { background: none; padding: 0; color: #F6F0F2; }
+.badge { display: inline-block; background: linear-gradient(135deg, #F472B6, #E11D74); color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; margin: 0 8px 8px 0; }
+.warning { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+.warning strong { color: #FBBF24; }
+.success { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+.success strong { color: #34D399; }
+.danger { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.35); border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+.danger strong { color: #F87171; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+th { color: #F6F0F2; font-weight: 600; font-size: 14px; }
+td { color: #B8A8AE; font-size: 14px; }
+.subtitle { color: #B8A8AE; font-size: 16px; margin-bottom: 24px; }
+a { color: #F472B6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.step { background: #1A1014; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin: 12px 0; }
+.step-num { display: inline-block; width: 28px; height: 28px; background: linear-gradient(135deg, #F472B6, #E11D74); color: white; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; margin-right: 12px; }
+.flow { background: #1A1014; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px 24px; margin: 16px 0; font-family: 'SF Mono', ui-monospace, monospace; font-size: 13px; color: #F6F0F2; line-height: 1.9; }
+nav.toc { background: #1A1014; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px 24px; margin: 24px 0 8px; }
+nav.toc a { display: block; margin: 6px 0; color: #B8A8AE; }
+nav.toc a:hover { color: #F472B6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Muse AI</h1>
+<p class="subtitle">AI Image Generator for iOS — Documentation</p>
+
+<span class="badge">SwiftUI</span>
+<span class="badge">iOS 16+</span>
+<span class="badge">StoreKit 2</span>
+<span class="badge">Xcode 15+</span>
+
+<div class="danger">
+<strong>You must use your own paid OpenAI API account.</strong> Muse AI is a client app. It is not an official OpenAI product and has no partnership with OpenAI. Image generation will not work until you create an account at <a href="https://platform.openai.com">platform.openai.com</a>, add a payment method, purchase credits, and paste your API key into <code>AppConfig.swift</code>. This item does not include API access or credits.
+</div>
+
+<nav class="toc">
+<strong style="color:#F6F0F2;">Contents</strong>
+<a href="#quick-start">1. Quick Start</a>
+<a href="#beginner">2. Beginner Xcode Guide (text, colors, name, icon)</a>
+<a href="#walkthrough">3. Onboarding and Paywall Walkthrough</a>
+<a href="#device">4. Test on a Physical Device</a>
+<a href="#screenshots">5. Screenshots to Capture</a>
+<a href="#architecture">6. Architecture and Data Flow</a>
+<a href="#structure">7. Project Structure</a>
+<a href="#customize">8. Customization</a>
+<a href="#api">9. OpenAI API Setup (paid account)</a>
+<a href="#storekit">10. StoreKit Setup</a>
+<a href="#widget">11. Widget Setup</a>
+<a href="#checklist">12. App Store Checklist</a>
+<a href="#features">13. Feature List</a>
+<a href="#troubleshooting">14. Troubleshooting</a>
+<a href="#changelog">15. Changelog</a>
+</nav>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="quick-start">1. Quick Start</h2>
+
+<div class="step">
+<span class="step-num">1</span>
+<strong>Open the project</strong><br>
+<code>ArtGenerator/ArtGenerator.xcodeproj</code> in Xcode 15 or later
+</div>
+
+<div class="step">
+<span class="step-num">2</span>
+<strong>Add your paid OpenAI API key</strong><br>
+Open <code>Configurations/AppConfig.swift</code> and replace the placeholder:
+<pre><code>static let apiKey: String = "sk-proj-YOUR_KEY_HERE"</code></pre>
+Get a key at <a href="https://platform.openai.com/api-keys">platform.openai.com/api-keys</a> after billing is enabled.
+</div>
+
+<div class="step">
+<span class="step-num">3</span>
+<strong>Replace placeholder URLs</strong>
+<pre><code>static let emailSupport = "support@yourdomain.com"
+static let privacyURL = URL(string: "https://yourdomain.com/privacy")!
+static let termsAndConditionsURL = URL(string: "https://yourdomain.com/terms")!</code></pre>
+</div>
+
+<div class="step">
+<span class="step-num">4</span>
+<strong>Configure StoreKit for testing</strong><br>
+Product → Scheme → Edit Scheme → Run → Options → StoreKit Configuration → <code>Products.storekit</code>
+</div>
+
+<div class="step">
+<span class="step-num">5</span>
+<strong>Build and run</strong><br>
+Select an iPhone simulator or a connected device → <code>Cmd+R</code>
+</div>
+
+<div class="success">
+<strong>Done.</strong> You should see the Muse AI splash, then onboarding. Generation still needs a paid OpenAI account with credits.
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="beginner">2. Beginner Xcode Guide</h2>
+
+<p>You can reskin Muse AI without being a senior iOS developer. Work in small steps and run the app after each change (<code>Cmd+R</code>).</p>
+
+<h3>2.1 Open and run</h3>
+<ol>
+<li>Double-click <code>ArtGenerator.xcodeproj</code>.</li>
+<li>Wait until indexing finishes (progress in the top status bar).</li>
+<li>In the toolbar, choose iPhone 15 (or any simulator).</li>
+<li>Press the Play button or <code>Cmd+R</code>.</li>
+</ol>
+<p>If signing fails, select the ArtGenerator target → Signing &amp; Capabilities → check <em>Automatically manage signing</em> → pick your Apple ID team.</p>
+
+<h3>2.2 Change text you see on screen</h3>
+<ol>
+<li>Press <code>Cmd+Shift+F</code> (Find in Project).</li>
+<li>Type the exact words from the UI, for example <code>Meet Muse AI</code> or <code>Upgrade to Pro</code>.</li>
+<li>Open the result. Text lives inside quotes, like <code>Text("Meet Muse AI")</code>.</li>
+<li>Change only the words inside the quotes. Do not delete the quotes or parentheses.</li>
+<li>Run again to confirm.</li>
+</ol>
+<p>Splash title and Settings version come from <code>AppConfig.swift</code> (<code>appName</code>, <code>appTagline</code>, <code>appVersion</code>). Change them once and several screens update together.</p>
+
+<h3>2.3 Change the app name on the home screen</h3>
+<ol>
+<li>Click the blue ArtGenerator project icon in the left file list.</li>
+<li>Select the ArtGenerator target → General → Display Name.</li>
+<li>Type your name (keep it short; iOS truncates long names under the icon).</li>
+<li>Also set <code>AppConfig.appName</code> to the same string.</li>
+</ol>
+
+<h3>2.4 Change colors</h3>
+<p>All brand colors live in <code>Configurations/DesignSystem.swift</code>.</p>
+<pre><code>// Main brand color (buttons, chips, selected states)
+static let accent = Color(hex: "E11D74")
+
+// Lighter tint
+static let accentLight = Color(hex: "F472B6")</code></pre>
+<p>Use a 6-digit hex without <code>#</code>. Examples: blue <code>"2563EB"</code>, teal <code>"0D9488"</code>, gold <code>"D4A574"</code>.</p>
+<p>Button fills use <code>DS.Gradients.accent</code> a few lines below. Change those hex values to match your accent so splash, paywall, and Generate stay consistent.</p>
+
+<h3>2.5 Change the app icon</h3>
+<ol>
+<li>Prepare a 1024×1024 PNG (no transparency for App Store).</li>
+<li>In Xcode, open <code>Assets.xcassets</code> → AppIcon.</li>
+<li>Drag your PNG onto the 1024 slot, or replace <code>app-icon.png</code> in <code>AppIcon.appiconset</code>.</li>
+</ol>
+
+<h3>2.6 Common Xcode actions</h3>
+<table>
+<tr><th>Action</th><th>Shortcut</th></tr>
+<tr><td>Run</td><td>Cmd+R</td></tr>
+<tr><td>Stop</td><td>Cmd+.</td></tr>
+<tr><td>Find in file</td><td>Cmd+F</td></tr>
+<tr><td>Find in project</td><td>Cmd+Shift+F</td></tr>
+<tr><td>Clean build folder</td><td>Cmd+Shift+K</td></tr>
+<tr><td>Open a file quickly</td><td>Cmd+Shift+O, then type the file name</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="walkthrough">3. Onboarding and Paywall Walkthrough</h2>
+
+<h3>3.1 First launch</h3>
+<ol>
+<li><strong>Splash</strong> — About 1.6 seconds. Shows the Muse AI name and tagline <em>Imagine. Create. Share.</em></li>
+<li><strong>Onboarding page 1</strong> — Meet Muse AI.</li>
+<li><strong>Onboarding page 2</strong> — Twelve signature styles.</li>
+<li><strong>Onboarding page 3</strong> — Personal studio / gallery.</li>
+<li><strong>Onboarding page 4</strong> — Five free images daily. <em>Start Creating</em> dismisses onboarding. <em>Skip</em> is available on pages 1–3.</li>
+</ol>
+<p>Onboarding is stored in UserDefaults under <code>hasSeenOnboarding</code>. To see it again, delete the app from the simulator or device and reinstall, or search that key in code and reset it while debugging.</p>
+
+<h3>3.2 Paywall</h3>
+<p>The paywall is <code>Views/PaywallView.swift</code>. It appears when:</p>
+<ul>
+<li>The user taps Upgrade to Pro in Settings or the iPad sidebar.</li>
+<li>The user hits a locked style or Pro-only feature.</li>
+<li>The user finishes their 3rd generation (<code>AppConfig.paywallAfterGenerations</code>).</li>
+</ul>
+<p>What you should see:</p>
+<ol>
+<li>Close button (top right).</li>
+<li>Headline from the A/B variant (yearly-first or lifetime-first).</li>
+<li>Rating / creations / styles badges.</li>
+<li>Free vs Pro comparison.</li>
+<li>Three products: Monthly $3.99, Yearly $9.99, Lifetime $19.99 (prices come from StoreKit when products load).</li>
+<li>Purchase button, Restore Purchases, Privacy Policy, Terms of Use.</li>
+</ol>
+<p>Local testing: attach <code>Products.storekit</code> in the scheme. Purchases complete without a real charge. On a device without that file, use a Sandbox Apple ID.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="device">4. Test on a Physical Device</h2>
+
+<p>The simulator is fine for UI. Use a real iPhone or iPad for haptics, the photo picker, widgets, notifications, and StoreKit sandbox.</p>
+
+<ol>
+<li>Plug in the device and unlock it. If macOS asks to Trust This Computer, confirm on the phone.</li>
+<li>In Xcode, set the run destination to your device (not a simulator).</li>
+<li>Target → Signing &amp; Capabilities → Automatically manage signing → select your Team.</li>
+<li>If the bundle ID is already used, change it to something unique such as <code>com.yourname.museai</code>. Keep the widget extension bundle ID as <code>your.main.id.ArtGeneratorWidget</code> (or match whatever Xcode suggests).</li>
+<li>On the device go to Settings → General → VPN &amp; Device Management (or Device Management) → tap your developer name → Trust.</li>
+<li>Confirm <code>AppConfig.apiKey</code> is a real key from a <strong>paid</strong> OpenAI account with credits. The device must be on Wi-Fi or cellular.</li>
+<li>Press <code>Cmd+R</code>. After install, walk through splash → onboarding → Explore → Create → Gallery → Settings → paywall.</li>
+<li>Subscriptions: either leave StoreKit Configuration set to <code>Products.storekit</code> while running from Xcode, or sign out of the real App Store on the device and sign in with a Sandbox tester from App Store Connect.</li>
+</ol>
+
+<div class="warning">
+<strong>Free Apple ID vs paid Developer Program:</strong> You can install on your own iPhone with a free Apple ID for a few days. App Store submission, TestFlight, and longer device installs need the $99/year Apple Developer Program.
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="screenshots">5. Screenshots to Capture</h2>
+
+<p>For CodeCanyon and the App Store, capture these screens on an iPhone 15 (6.7") simulator or device, then repeat key screens on iPad:</p>
+
+<ol>
+<li>Splash</li>
+<li>Onboarding (at least page 1 and page 4)</li>
+<li>Explore with inspiration cards</li>
+<li>Create with a prompt entered</li>
+<li>Create showing a finished image</li>
+<li>Paywall with a plan selected</li>
+<li>Gallery grid</li>
+<li>Image detail / editor</li>
+<li>Settings (Pro banner + streak)</li>
+</ol>
+
+<p>Xcode: File → Export (or take a simulator screenshot with <code>Cmd+S</code> while the simulator is focused). For the App Store you also need 6.7" iPhone and 12.9" iPad sizes.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="architecture">6. Architecture and Data Flow</h2>
+
+<p>Muse AI is SwiftUI only (no Storyboards except the launch screen). Pattern: <strong>MVVM-style views + one observable DataManager + focused service types</strong>.</p>
+
+<h3>6.1 Layers</h3>
+<table>
+<tr><th>Layer</th><th>Types</th><th>Role</th></tr>
+<tr><td>App entry</td><td>ArtGeneratorApp, AppDelegate</td><td>Window, DataManager, splash / onboarding gate</td></tr>
+<tr><td>Config</td><td>AppConfig, DesignSystem</td><td>Brand, API key, limits, colors, type, spacing</td></tr>
+<tr><td>UI</td><td>Flows/* and Views/*</td><td>Screens. They read/write DataManager; they do not call the API directly</td></tr>
+<tr><td>State</td><td>DataManager</td><td>Prompt, selected style, generated image, premium flag, error alerts</td></tr>
+<tr><td>Services</td><td>OpenAIService, StoreKitManager, GalleryManager, others</td><td>Network, purchases, disk, streaks, notifications</td></tr>
+<tr><td>Models</td><td>ArtStyle, AssetModel, GeneratedArt</td><td>Plain data</td></tr>
+</table>
+
+<h3>6.2 Generate-image data flow</h3>
+<div class="flow">
+CreatorTabView  (user taps Generate)
+        │
+        ▼
+DataManager.generate()
+        │  checks remainingFreeGenerations / isPremium
+        ▼
+OpenAIService (Swift actor, thread-safe)
+        │  POST {apiBaseURL}/images/generations
+        │  Authorization: Bearer {AppConfig.apiKey}
+        ▼
+OpenAI API  (buyer's paid account + credits)
+        │  JSON with base64 image
+        ▼
+UIImage in DataManager.generatedImage
+        │
+        ▼
+GalleryManager.save()  →  Documents directory + metadata JSON
+        │
+        ▼
+GalleryView / ImageDetailView refresh via @Published
+</div>
+
+<h3>6.3 Subscription data flow</h3>
+<div class="flow">
+PaywallView / Settings
+        │
+        ▼
+StoreKitManager.purchase(product)
+        │  StoreKit 2 Product.purchase()
+        ▼
+App Store / StoreKit Configuration file
+        │
+        ▼
+Transaction.currentEntitlements
+        │
+        ▼
+DataManager.isPremium == true
+        │
+        ▼
+Limits removed (styles, batch, upscale, daily cap)
+</div>
+
+<p>Concurrency: <code>OpenAIService</code> is an actor. UI types that own <code>@Published</code> state are marked <code>@MainActor</code>.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="structure">7. Project Structure</h2>
+
+<pre><code>ArtGenerator/
+├── AppIntents/          → Siri Shortcuts
+├── Configurations/      → AppConfig + DesignSystem
+├── DataManager/         → Central state
+├── Flows/               → Tabs: Explore, Create, Gallery, Settings
+├── Lifecycle/           → App entry
+├── Models/              → ArtStyle, AssetModel
+├── Services/            → API, StoreKit, gallery, streaks, etc.
+├── Views/               → Onboarding, paywall, editor, splash
+└── Assets.xcassets/     → Icon, colors, inspiration images
+
+ArtGeneratorWidget/      → Home screen widget</code></pre>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="customize">8. Customization</h2>
+
+<h3>8.1 App name</h3>
+<p>Display Name in the target, plus <code>AppConfig.appName</code> / <code>appTagline</code>.</p>
+
+<h3>8.2 Colors</h3>
+<p><code>DesignSystem.swift</code> — <code>DS.Colors.accent</code> and <code>DS.Gradients.accent</code>.</p>
+
+<h3>8.3 Pricing</h3>
+<p>Product IDs in <code>StoreKitManager.swift</code> and <code>Products.storekit</code>. Create matching products in App Store Connect before release.</p>
+
+<h3>8.4 Free tier</h3>
+<pre><code>static let freeGenerationsPerDay: Int = 5
+static let freeStyleCount: Int = 3
+static let paywallAfterGenerations: Int = 3</code></pre>
+
+<h3>8.5 Art styles</h3>
+<p>Edit <code>Models/ArtStyle.swift</code>. Each style has a name, SF Symbol, and prompt suffix.</p>
+
+<h3>8.6 Inspiration images</h3>
+<p>Replace assets in <code>Assets.xcassets</code> and the <code>inspirationAssets</code> array in <code>AppConfig.swift</code>.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="api">9. OpenAI API Setup (Paid Account Required)</h2>
+
+<div class="danger">
+<strong>Required:</strong> a paid OpenAI API account and credits that you purchase yourself. A ChatGPT Plus login is not enough. You need API billing on platform.openai.com.
+</div>
+
+<h3>9.1 Create the account and key</h3>
+<ol>
+<li>Go to <a href="https://platform.openai.com">platform.openai.com</a> and sign up or log in.</li>
+<li>Open Settings → Billing → add a payment method.</li>
+<li>Buy credits (or enable usage-based billing) and set a monthly limit.</li>
+<li>API Keys → Create new secret key.</li>
+<li>Paste it into <code>AppConfig.swift</code>. Never commit a real key to a public repo.</li>
+</ol>
+
+<h3>9.2 Approximate costs</h3>
+<table>
+<tr><th>Model</th><th>Quality</th><th>Cost per image (approx.)</th></tr>
+<tr><td>gpt-image-1</td><td>Low</td><td>~$0.02</td></tr>
+<tr><td>gpt-image-1</td><td>Medium</td><td>~$0.04</td></tr>
+<tr><td>gpt-image-1</td><td>High</td><td>~$0.08</td></tr>
+<tr><td>gpt-4o-mini (prompt enhance)</td><td>—</td><td>~$0.005</td></tr>
+</table>
+<p>Prices change. Check OpenAI’s current pricing page.</p>
+
+<h3>9.3 Production security</h3>
+<p>The default project calls OpenAI from the device so setup stays simple. For a public App Store app, set <code>useBackendProxy = true</code> in <code>AppConfig.swift</code> and keep the real key on your server.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="storekit">10. StoreKit Setup</h2>
+
+<h3>10.1 Local testing</h3>
+<ol>
+<li>Edit Scheme → Run → Options</li>
+<li>StoreKit Configuration → <code>Products.storekit</code></li>
+<li>Run. Purchases succeed in the local StoreKit environment.</li>
+</ol>
+
+<h3>10.2 App Store Connect</h3>
+<table>
+<tr><th>Type</th><th>Product ID</th><th>Suggested price</th></tr>
+<tr><td>Auto-Renewable</td><td>com.artgenerator.monthly</td><td>$3.99/month</td></tr>
+<tr><td>Auto-Renewable</td><td>com.artgenerator.yearly</td><td>$9.99/year</td></tr>
+<tr><td>Non-Consumable</td><td>com.artgenerator.lifetime</td><td>$19.99</td></tr>
+</table>
+<p>Change IDs to your own reverse-DNS names before shipping. Update both the Swift enum and the StoreKit file.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="widget">11. Widget Setup</h2>
+
+<p>The widget extension is already in the project. It shows rotating prompt ideas.</p>
+<ul>
+<li>Small: prompt + “Tap to create”</li>
+<li>Medium: Muse AI header + prompt</li>
+</ul>
+<p>Run the main app first, then add the widget from the Home Screen widget gallery. Updates about every 4 hours.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="checklist">12. App Store Checklist</h2>
+
+<ol>
+<li>Use your own paid API key (or a backend proxy).</li>
+<li>Host real Privacy Policy and Terms pages; put the URLs in AppConfig.</li>
+<li>Change the bundle identifier.</li>
+<li>Create StoreKit products in App Store Connect.</li>
+<li>Capture 6.7" iPhone and 12.9" iPad screenshots (see section 5).</li>
+<li>Write the App Store description. Do not imply an official OpenAI partnership.</li>
+<li>Archive in Xcode → Product → Archive → Distribute.</li>
+</ol>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="features">13. Feature List</h2>
+
+<table>
+<tr><th>Category</th><th>Features</th></tr>
+<tr><td>Generation</td><td>Image API, 12 styles, prompt enhance, image-to-image, negative prompts, batch, 3 sizes, 3 qualities, retry</td></tr>
+<tr><td>Gallery</td><td>Auto-save, favorites, collections, search, cache, detail view</td></tr>
+<tr><td>Editing</td><td>Filters, rotate/flip, text overlay, upscale 2–4x, JPEG/PNG/HEIC export</td></tr>
+<tr><td>Monetization</td><td>StoreKit 2, 3 tiers, A/B paywall, smart triggers</td></tr>
+<tr><td>Retention</td><td>Streaks, bonus credits, review prompts, notifications, prompt library</td></tr>
+<tr><td>Design</td><td>Design system, dark/light, haptics, sounds, confetti, splash, onboarding</td></tr>
+<tr><td>Platform</td><td>iPhone, iPad sidebar, Mac Catalyst, Siri, widgets</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="troubleshooting">14. Troubleshooting</h2>
+
+<h3>“Billing hard limit has been reached” / insufficient quota</h3>
+<p>Your OpenAI account needs credits. platform.openai.com → Billing → add credits. This is expected until a paid API account is funded.</p>
+
+<h3>“Invalid API key”</h3>
+<p>The key must start with <code>sk-</code> and must be pasted without extra spaces. A ChatGPT password will not work.</p>
+
+<h3>Haptic errors in the simulator console</h3>
+<p>Apple simulator noise. Ignore it. Test haptics on a device.</p>
+
+<h3>“No active account” StoreKit</h3>
+<p>Attach <code>Products.storekit</code> in the scheme, or use a Sandbox Apple ID on a device.</p>
+
+<h3>Widget missing</h3>
+<p>Run the main app once, then add Muse AI Inspiration from the widget gallery.</p>
+
+<!-- ═══════════════════════════════════ -->
+<h2 id="changelog">15. Changelog</h2>
+
+<p><strong>Version 2.1</strong> — 18 August 2026<br>
+Muse AI branding (name, tagline, atelier rose palette). Documentation expanded for CodeCanyon: paid API account requirement, beginner Xcode edits, architecture and data flow, onboarding/paywall walkthrough, physical-device testing.</p>
+
+<p><strong>Version 2.0</strong> — 12 May 2026<br>
+SwiftUI rewrite, image API integration, StoreKit 2, design system, iPhone + iPad + Mac Catalyst.</p>
+
+<h2>Support</h2>
+<p>Use the CodeCanyon item comments or the support tab. Please include your Xcode version and whether you are on simulator or device.</p>
+
+<p style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); color: #6E5C64; font-size: 13px;">
+Muse AI v2.1 — SwiftUI iOS app. Not affiliated with OpenAI.
+</p>
+
+</div>
+</body>
+</html>
